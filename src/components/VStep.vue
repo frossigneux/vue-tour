@@ -81,8 +81,8 @@ export default {
       // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
 
       if (this.targetElement) {
-        //  this.enableScrolling()
-        //  this.createHighlight()
+        this.enableScrolling()
+        this.createHighlight()
 
         /* eslint-disable no-new */
         /* new Popper(
@@ -90,7 +90,7 @@ export default {
           this.$refs['v-step-' + this.hash],
           this.params
         ) */
-
+        console.log('createPopper params', this.params)
         createPopper(
           this.targetElement,
           this.$refs['v-step-' + this.hash]
