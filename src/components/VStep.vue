@@ -81,21 +81,21 @@ export default {
       // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
 
       if (this.targetElement) {
-        //this.enableScrolling()
-        //this.createHighlight()
+        //  this.enableScrolling()
+        //  this.createHighlight()
 
         /* eslint-disable no-new */
-        /*new Popper(
+        /* new Popper(
           this.targetElement,
           this.$refs['v-step-' + this.hash],
           this.params
-        )*/
+        ) */
 
-        /*createPopper(
+        createPopper(
           this.targetElement,
           this.$refs['v-step-' + this.hash],
           this.params
-        )*/
+        )
       } else {
         console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
         this.$emit('targetNotFound', this.step)
