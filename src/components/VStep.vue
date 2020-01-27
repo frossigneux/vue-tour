@@ -93,8 +93,8 @@ export default {
 
         createPopper(
           this.targetElement,
-          this.$refs['v-step-' + this.hash],
-          this.params
+          this.$refs['v-step-' + this.hash]
+          // this.params
         )
       } else {
         console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
