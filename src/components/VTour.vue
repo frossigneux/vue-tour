@@ -10,6 +10,7 @@
       :is-last="isLast"
       :labels="customOptions.labels"
       :highlight="customOptions.highlight"
+      :clickit="customOptions.clickit"
     >
       <!--Default slot {{ currentStep }}-->
       <v-step
@@ -23,6 +24,7 @@
         :is-last="isLast"
         :labels="customOptions.labels"
         :highlight="customOptions.highlight"
+        :clickit="customOptions.clickit"
       >
         <!--<div v-if="index === 2" slot="actions">
           <a @click="nextStep">Next step</a>

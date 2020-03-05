@@ -58,6 +58,9 @@ export default {
     },
     highlight: {
       type: Boolean
+    },
+    clickit: {
+      type: Boolean
     }
   },
   data () {
@@ -71,6 +74,7 @@ export default {
       return {
         ...DEFAULT_STEP_OPTIONS,
         ...{ highlight: this.highlight }, // Use global tour highlight setting first
+        ...{ clickit: this.clickit }, // Use global tour clickit setting first
         ...this.step.params // Then use local step parameters if defined
       }
     }
@@ -83,6 +87,7 @@ export default {
       if (this.targetElement) {
         this.enableScrolling()
         this.createHighlight()
+        this.createClickit()
 
         /* eslint-disable no-new */
         /* new Popper(
@@ -137,10 +142,19 @@ export default {
         if (!this.targetElement.style.position) {
           this.targetElement.classList.add(HIGHLIGHT.CLASSES.TARGET_RELATIVE)
         }
+      } else {
+        document.body.classList.remove(HIGHLIGHT.CLASSES.ACTIVE)
+      }
+    },
+    isClickitEnabled () {
+      console.log(`[Vue Tour] Clickit is ${this.params.clickit ? 'enabled' : 'disabled'} for .v-step[id="${this.hash}"]`)
+      return this.params.clickit
+    },
+    createClickit () {
+      if (this.isClickitEnabled()) {
         console.log('createHighlight click', this.targetElement)
         this.targetElement.click()
       } else {
-        document.body.classList.remove(HIGHLIGHT.CLASSES.ACTIVE)
       }
     },
     removeHighlight () {
