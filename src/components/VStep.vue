@@ -137,6 +137,9 @@ export default {
         if (!this.targetElement.style.position) {
           this.targetElement.classList.add(HIGHLIGHT.CLASSES.TARGET_RELATIVE)
         }
+        console.log("createHighlight click",click)
+        this.targetElement.click()
+
       } else {
         document.body.classList.remove(HIGHLIGHT.CLASSES.ACTIVE)
       }
