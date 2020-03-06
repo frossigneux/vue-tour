@@ -87,6 +87,10 @@ export default {
         ...DEFAULT_STEP_OPTIONS,
         ...{ highlight: this.highlight }, // Use global tour highlight setting first
         ...{ clickit: this.clickit }, // Use global tour clickit setting first
+        ...{ showSkip: this.showSkip }, // Use global tour showSkip setting first
+        ...{ showPrev: this.showPrev }, // Use global tour showPrev setting first
+        ...{ showNext: this.showNext }, // Use global tour showNext setting first
+        ...{ showStop: this.showStop }, // Use global tour showStop setting first
         ...this.step.params // Then use local step parameters if defined
       }
     }
