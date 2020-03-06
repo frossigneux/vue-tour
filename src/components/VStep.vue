@@ -98,7 +98,8 @@ export default {
         console.log('createPopper params', this.params)
         createPopper(
           this.targetElement,
-          this.$refs['v-step-' + this.hash]
+          this.$refs['v-step-' + this.hash],
+          { placement: this.params.placement }
           // this.params
         )
       } else {
