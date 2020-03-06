@@ -15,9 +15,9 @@
 
     <slot name="actions">
       <div class="v-step__buttons">
-        <button @click.prevent="stop" v-if="!isLast && showSkip" class="v-step__button">{{ labels.buttonSkip }}</button>
-        <button @click.prevent="previousStep" v-if="!isFirst && showPrev" class="v-step__button">{{ labels.buttonPrevious }}</button>
-        <button @click.prevent="nextStep" v-if="!isLast && showNext" class="v-step__button">{{ labels.buttonNext }}</button>
+        <button @click.prevent="stop" v-if="!!isLast && showSkip" class="v-step__button">{{ labels.buttonSkip }}</button>
+        <button @click.prevent="previousStep" v-if="!!isFirst && showPrev" class="v-step__button">{{ labels.buttonPrevious }}</button>
+        <button @click.prevent="nextStep" v-if="!!isLast && showNext" class="v-step__button">{{ labels.buttonNext }}</button>
         <button @click.prevent="stop" v-if="isLast && showStop" class="v-step__button">{{ labels.buttonStop }}</button>
       </div>
     </slot>
@@ -99,6 +99,10 @@ export default {
     createStep () {
       // TODO: debug mode
       // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
+      console.log('showSkip:', this.showSkip)
+      console.log('showPrev:', this.showPrev)
+      console.log('showNext:', this.showNext)
+      console.log('showStop:', this.showStop)
 
       if (this.targetElement) {
         this.enableScrolling()

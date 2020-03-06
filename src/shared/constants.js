@@ -15,7 +15,11 @@ export const DEFAULT_OPTIONS = {
     buttonStop: 'Finish'
   },
   startTimeout: 0,
-  useKeyboardNavigation: true
+  useKeyboardNavigation: true,
+  showStop: true,
+  showNext: true,
+  showPrev: true,
+  showSkip: true
 }
 
 export const HIGHLIGHT = {
@@ -39,7 +43,8 @@ export const DEFAULT_STEP_OPTIONS = {
   showStop: true,
   showNext: true,
   showPrev: true,
-  showSkip: true
+  showSkip: true,
+  clickit: false
 }
 
 export const KEYS = {
