@@ -35,7 +35,11 @@ export const DEFAULT_STEP_OPTIONS = {
       element: '.v-step__arrow'
     }
   },
-  placement: 'bottom'
+  placement: 'bottom',
+  showStop: true,
+  showNext: true,
+  showPrev: true,
+  showSkip: true
 }
 
 export const KEYS = {

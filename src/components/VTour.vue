@@ -11,6 +11,10 @@
       :labels="customOptions.labels"
       :highlight="customOptions.highlight"
       :clickit="customOptions.clickit"
+      :showStop="customOptions.showStop"
+      :showNext="customOptions.showNext"
+      :showPrev="customOptions.showPrev"
+      :showSkip="customOptions.showSkip"
     >
       <!--Default slot {{ currentStep }}-->
       <v-step
@@ -25,6 +29,10 @@
         :labels="customOptions.labels"
         :highlight="customOptions.highlight"
         :clickit="customOptions.clickit"
+        :showStop="customOptions.showStop"
+        :showNext="customOptions.showNext"
+        :showPrev="customOptions.showPrev"
+        :showSkip="customOptions.showSkip"
       >
         <!--<div v-if="index === 2" slot="actions">
           <a @click="nextStep">Next step</a>
