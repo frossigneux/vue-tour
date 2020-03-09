@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import Popper from 'popper.js'
+import { createPopper } from '@popperjs/core'
 import jump from 'jump.js'
 import sum from 'hash-sum'
 import { DEFAULT_STEP_OPTIONS, HIGHLIGHT } from '../shared/constants'
@@ -107,11 +107,10 @@ export default {
         this.enableScrolling()
         this.createHighlight()
 
-        /* eslint-disable no-new */
-        new Popper(
+        createPopper(
           this.targetElement,
           this.$refs['v-step-' + this.hash],
-          this.params
+          { placement: this.params.placement }
         )
       } else {
         if (this.debug) {
@@ -220,11 +219,11 @@ export default {
     }
   }
 
-  .v-step[x-placement^="top"] {
-    margin-bottom: 0.5rem;
+  .v-step[data-popper-placement^="top"] {
+    margin-bottom: 0.5rem !important;
   }
 
-  .v-step[x-placement^="top"] .v-step__arrow {
+  .v-step[data-popper-placement^="top"] .v-step__arrow {
     border-width: 0.5rem 0.5rem 0 0.5rem;
     border-left-color: transparent;
     border-right-color: transparent;
@@ -235,11 +234,11 @@ export default {
     margin-bottom: 0;
   }
 
-  .v-step[x-placement^="bottom"] {
-    margin-top: 0.5rem;
+  .v-step[data-popper-placement^="bottom"] {
+    margin-top: 0.5rem !important;
   }
 
-  .v-step[x-placement^="bottom"] .v-step__arrow {
+  .v-step[data-popper-placement^="bottom"] .v-step__arrow {
     border-width: 0 0.5rem 0.5rem 0.5rem;
     border-left-color: transparent;
     border-right-color: transparent;
@@ -250,11 +249,11 @@ export default {
     margin-bottom: 0;
   }
 
-  .v-step[x-placement^="right"] {
-    margin-left: 0.5rem;
+  .v-step[data-popper-placement^="right"] {
+    margin-left: 0.5rem !important;
   }
 
-  .v-step[x-placement^="right"] .v-step__arrow {
+  .v-step[data-popper-placement^="right"] .v-step__arrow {
     border-width: 0.5rem 0.5rem 0.5rem 0;
     border-left-color: transparent;
     border-top-color: transparent;
@@ -265,11 +264,11 @@ export default {
     margin-right: 0;
   }
 
-  .v-step[x-placement^="left"] {
-    margin-right: 0.5rem;
+  .v-step[data-popper-placement^="left"] {
+    margin-right: 0.5rem !important;
   }
 
-  .v-step[x-placement^="left"] .v-step__arrow {
+  .v-step[data-popper-placement^="left"] .v-step__arrow {
     border-width: 0.5rem 0 0.5rem 0.5rem;
     border-top-color: transparent;
     border-right-color: transparent;
