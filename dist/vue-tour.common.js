@@ -3688,12 +3688,12 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
 var es_function_name = __webpack_require__("b0c0");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"306e349c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VTour.vue?vue&type=template&id=44b96024&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"v-tour"},[_vm._t("default",[(_vm.steps[_vm.currentStep])?_c('v-step',{key:_vm.currentStep,attrs:{"step":_vm.steps[_vm.currentStep],"previous-step":_vm.previousStep,"next-step":_vm.nextStep,"stop":_vm.stop,"skip":_vm.skip,"finish":_vm.finish,"is-first":_vm.isFirst,"is-last":_vm.isLast,"labels":_vm.customOptions.labels,"enabled-buttons":_vm.customOptions.enabledButtons,"highlight":_vm.customOptions.highlight,"stop-on-fail":_vm.customOptions.stopOnTargetNotFound,"debug":_vm.customOptions.debug},on:{"targetNotFound":function($event){return _vm.$emit('targetNotFound', $event)}}}):_vm._e()],{"currentStep":_vm.currentStep,"steps":_vm.steps,"previousStep":_vm.previousStep,"nextStep":_vm.nextStep,"stop":_vm.stop,"skip":_vm.skip,"finish":_vm.finish,"isFirst":_vm.isFirst,"isLast":_vm.isLast,"labels":_vm.customOptions.labels,"enabledButtons":_vm.customOptions.enabledButtons,"highlight":_vm.customOptions.highlight,"debug":_vm.customOptions.debug})],2)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"306e349c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VTour.vue?vue&type=template&id=1e5eefc1&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"v-tour"},[_vm._t("default",[(_vm.steps[_vm.currentStep] && !_vm.paused)?_c('v-step',{key:_vm.currentStep,attrs:{"step":_vm.steps[_vm.currentStep],"previous-step":_vm.previousStep,"next-step":_vm.nextStep,"stop":_vm.stop,"skip":_vm.skip,"finish":_vm.finish,"is-first":_vm.isFirst,"is-last":_vm.isLast,"labels":_vm.customOptions.labels,"enabled-buttons":_vm.customOptions.enabledButtons,"highlight":_vm.customOptions.highlight,"stop-on-fail":_vm.customOptions.stopOnTargetNotFound,"debug":_vm.customOptions.debug},on:{"targetNotFound":function($event){return _vm.$emit('targetNotFound', $event)}}}):_vm._e()],{"currentStep":_vm.currentStep,"steps":_vm.steps,"previousStep":_vm.previousStep,"nextStep":_vm.nextStep,"stop":_vm.stop,"skip":_vm.skip,"finish":_vm.finish,"isFirst":_vm.isFirst,"isLast":_vm.isLast,"labels":_vm.customOptions.labels,"enabledButtons":_vm.customOptions.enabledButtons,"highlight":_vm.customOptions.highlight,"debug":_vm.customOptions.debug})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/VTour.vue?vue&type=template&id=44b96024&
+// CONCATENATED MODULE: ./src/components/VTour.vue?vue&type=template&id=1e5eefc1&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
 var es_symbol = __webpack_require__("a4d3");
@@ -3739,6 +3739,7 @@ var DEFAULT_CALLBACKS = {
   onStart: function onStart() {},
   onPreviousStep: function onPreviousStep(currentStep) {},
   onNextStep: function onNextStep(currentStep) {},
+  onPause: function onPause(currentStep) {},
   onStop: function onStop() {},
   onSkip: function onSkip() {},
   onFinish: function onFinish() {}
@@ -3877,7 +3878,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
   },
   data: function data() {
     return {
-      currentStep: -1
+      currentStep: -1,
+      paused: false
     };
   },
   mounted: function mounted() {
@@ -3922,9 +3924,15 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
       // Wait for the DOM to be loaded, then start the tour
       setTimeout(function () {
-        _this.customCallbacks.onStart();
+        if (typeof startStep !== 'undefined') {
+          _this.currentStep = parseInt(startStep, 10);
+        } else if (!_this.paused || _this.currentStep === -1) {
+          _this.currentStep = 0;
+        }
 
-        _this.currentStep = typeof startStep !== 'undefined' ? parseInt(startStep, 10) : 0;
+        _this.customCallbacks.onStart(_this.currentStep);
+
+        _this.paused = false;
       }, this.customOptions.startTimeout);
     },
     previousStep: function previousStep() {
@@ -3938,6 +3946,11 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
         this.customCallbacks.onNextStep(this.currentStep);
         this.currentStep++;
       }
+    },
+    pause: function pause() {
+      this.customCallbacks.onPause(this.currentStep);
+      document.body.classList.remove('v-tour--active');
+      this.paused = true;
     },
     stop: function stop() {
       this.customCallbacks.onStop();

@@ -17,7 +17,7 @@
     >
       <!--Default slot {{ currentStep }}-->
       <v-step
-        v-if="steps[currentStep]"
+        v-if="steps[currentStep] && !paused"
         :step="steps[currentStep]"
         :key="currentStep"
         :previous-step="previousStep"
@@ -66,7 +66,8 @@ export default {
   },
   data () {
     return {
-      currentStep: -1
+      currentStep: -1,
+      paused: false
     }
   },
   mounted () {
@@ -115,8 +116,13 @@ export default {
     start (startStep) {
       // Wait for the DOM to be loaded, then start the tour
       setTimeout(() => {
-        this.customCallbacks.onStart()
-        this.currentStep = typeof startStep !== 'undefined' ? parseInt(startStep, 10) : 0
+        if (typeof startStep !== 'undefined') {
+          this.currentStep = parseInt(startStep, 10)
+        } else if (!this.paused || this.currentStep === -1) {
+          this.currentStep = 0
+        }
+        this.customCallbacks.onStart(this.currentStep)
+        this.paused = false
       }, this.customOptions.startTimeout)
     },
     previousStep () {
@@ -130,6 +136,11 @@ export default {
         this.customCallbacks.onNextStep(this.currentStep)
         this.currentStep++
       }
+    },
+    pause () {
+      this.customCallbacks.onPause(this.currentStep)
+      document.body.classList.remove('v-tour--active')
+      this.paused = true
     },
     stop () {
       this.customCallbacks.onStop()
