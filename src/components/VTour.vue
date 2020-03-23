@@ -119,8 +119,8 @@ export default {
         } else if (!this.paused || this.currentStep === -1) {
           this.currentStep = 0
         }
-        this.customCallbacks.onStart(this.currentStep)
         this.paused = false
+        this.customCallbacks.onStart(this.currentStep)
       }, this.customOptions.startTimeout)
     },
     previousStep () {
