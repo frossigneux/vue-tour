@@ -8,7 +8,7 @@
 
     <slot name="content">
       <div class="v-step__content">
-        <div v-if="step.content" v-html="step.content"></div>
+        <div v-if="step.content" v-html="$t(step.content)"></div>
         <div v-else>This is a demo step! The id of this step is {{ hash }} and it targets {{ step.target }}.</div>
       </div>
     </slot>
