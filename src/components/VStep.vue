@@ -293,16 +293,16 @@ export default {
   .v-step__button {
     background: transparent;
     border: .05rem solid white;
-    border-radius: .1rem;
+    border-radius: .8rem;
     color: white;
     cursor: pointer;
     display: inline-block;
     font-size: .8rem;
-    height: 1.8rem;
+    height: 2rem;
     line-height: 1rem;
     outline: none;
     margin: 0 0.2rem;
-    padding: .35rem .4rem;
+    padding: .35rem .6rem;
     text-align: center;
     text-decoration: none;
     transition: all .2s ease;
